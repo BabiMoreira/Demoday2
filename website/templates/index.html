@@ -3,17 +3,9 @@
 {% block conteudo %}
 
 <body>
-    <script src="{% static 'js/scroll-suave.js' %}" defer></script>
     <nav>
-        <a href="/"> <img src="static/img/logos/Logohelpse.png" alt="" class="logo"> </span> </a>
+        <a href="/"> <span class="nav-logo"> Help_se </span> </a>
         <ul>
-            <li><a id="link-inicio" href="/"> Home </a> </li>
-            <li><a id="link-projeto"> O projeto</a> </li>
-            <li><a id="link-carrossel"> Curiosidades </a> </li>
-            <li><a id="link-beneficio"> Benefícios </a> </li>
-            <li><a id="link-sobre" href="/sobre"> Equipe </a> </li>
-
-
             {% if logado %}
             <div class="buttons">
                 <a href="perfil"><button class="primary">Perfil</button></a>
@@ -21,52 +13,61 @@
             </div>
 
             {% else %}
-            <div class="buttons">
-                <a href="cadastro"><button class="primary">cadastre-se</button></a>
-                <button id="btnmostrar" class="btnmostrar secondary">entre</button>
+            <div class="show-dropdown">
+                <button>Entrar ⬇️ </button>
+                <div class="dropdown-content">
+                    <li>instituição</li>
+                    <li>paciente</li>
+                </div>
             </div>
+
             {% endif %}
         </ul>
         <!-- --------------------------------------BOTOES DA NAV RESPONSIVA -->
-        <div class="pesquisa nav-icon">
+        <div class="pesquisa mobile-only">
             <a href="#header">
                 <img class="" draggable="false" src="{% static 'img/search.svg' %}" alt="">
-             </a>
+            </a>
         </div>
-        <div class="menu-button nav-icon" id="menu">
+
+        <div class="menu-button mobile-only" id="menu">
             <span class="line"></span>
             <span class="line"></span>
             <span class="line"></span>
         </div>
     </nav>
+
+
     <main>
+        <div class="blank">'</div>
 
         <header id="header">
             <div class="info-content">
-                <h1>Encontre a solução para seus problemas aqui {{instituicao}} </h1>
-                <p>{{msg}} </p>
+                <h1>Serviços de psicoterapia no precinho, e perto de vc</h1>
 
-
-                <div class="input-container">
-                    <form method="get" class="search-bar especialidade" action="/busca_especialidade">
-                        <input class="text input" data-js="pesquisa-especialidade" name='q' id="id_q" type="text"
-                            placeholder="busque por especialidade">
-                        <img class="input-icon" draggable="false" src="{% static 'img/search.svg' %}" alt="">
-                    </form>
-
-                    <form method="get" class="search-bar localidade" action="/busca_localidade">
-                        <input class="text input" name='q' type="text" data-js="pesquisa-localidade"
-                            placeholder="busque por localidade">
-                        <img class="input-icon" draggable="false" src="{% static 'img/pin.svg' %}" alt="">
-                    </form>
-
-                    <!-- Ao pesquisar o django limpa o input, usamos js pra manter o que foi digitado no lugar -->
-                    <script>
-                        document.querySelector('[data-js="pesquisa-especialidade"]').value = '{{query}}';
-                        document.querySelector('[data-js="pesquisa-localidade"]').value = '{{query_l}}';
-                    </script>
-                </div>
             </div>
+
+
+            <div class="input-container">
+                <form method="get" class="search-bar especialidade" action="/busca_especialidade">
+                    <input class="text input" data-js="pesquisa-especialidade" name='q' id="id_q" type="text"
+                        placeholder="busque por especialidade">
+                    <img class="input-icon" draggable="false" src="{% static 'img/search.svg' %}" alt="">
+                </form>
+
+                <form method="get" class="search-bar localidade" action="/busca_localidade">
+                    <input class="text input" name='q' type="text" data-js="pesquisa-localidade"
+                        placeholder="busque por localidade">
+                    <img class="input-icon" draggable="false" src="{% static 'img/pin.svg' %}" alt="">
+                </form>
+
+                <!-- Ao pesquisar o django limpa o input, usamos js pra manter o que foi digitado no lugar -->
+                <script>
+                    document.querySelector('[data-js="pesquisa-especialidade"]').value = '{{query}}';
+                    document.querySelector('[data-js="pesquisa-localidade"]').value = '{{query_l}}';
+                </script>
+            </div>
+
 
             {% if mostrar_resultados %}
             <section class="resultados">
@@ -150,9 +151,6 @@
             </div>
 
             <div class="box-text">
-                <!-- <h2>Professores da UFRN citam uma série de fatores de risco
-                    que deixam os estudantes vulneráveis à depressão, como distância de casa, dificuldades financeiras e
-                    principalmente a pressão. E que 5% desses jovens declararam a tentativa de suicídio. -->
                 <h2>Estudos da UFRN citam fatores de risco
                     que deixam os estudantes vulneráveis à depressão, como distância de casa, dificuldades financeiras e
                     principalmente a pressão. 5% desses jovens declararam tentativa de suicídio.</h2>
@@ -199,54 +197,20 @@
                 <hr>
             </div>
 
-            <div class="sobre-content">
-                <div class="items">
-                    <img src="{% static 'img/icons/icon_custo.png' %}" alt="">
-                    <h2> Custo Benefício </h2>
-                    <p> Agende com os melhores profissionais <br> pelo menor preço e com instituições gratuitas. </p>
-                </div>
-                <hr>
-                <div class="items">
-                    <img src="{% static 'img/icons/icon_avaliation.png' %}" alt="">
-                    <h2> Pré-Análise </h2>
-                    <p> Questionário que avalia o estado do paciente,<br> a fim de auxiliar na procura de tratamento.
-                    </p>
-                </div>
-                <hr>
-                <div class="items">
-                    <img src="{% static 'img/icons/icon_calendar.png' %}" alt="">
-                    <h2> Agendamento Online </h2>
-                    <p> Agendamento rápido e simples. <br> Escolha o melhor local, data e horário </p>
-                </div>
-                <hr>
 
-            </div>
         </section>
 
         <!------------------------------- 4: FOOTER --------------------------------------->
 
         <footer>
-
-            <div class="footer-container">
-                <ul>
-                    <!-- <h3>Help.me</h3> -->
-                    <img src="static/img/logos/Logohelpse.png" alt="" class="logofooter">
-                    <li><a id="link-projeto" href="/"> O projeto</a> </li>
-                    <li><a id="link-carrossel" href="/"> Curiosidades </a> </li>
-                    <li><a id="link-beneficio" href="/"> Benefícios </a> </li>
-                    <li><a id="link-sobre" href="/sobre"> O time </a> </li>
-                </ul>
-            </div>
-
-            <div class="links">
-                <h3> Fique por dentro de tudo que acontece por aqui</h3>
-                <div class="Redes">
-                    <a class="ballfb" href="https://www.facebook.com/" target="_blank" id="fb"></a>
-                    <a class="balltwt" href="https://www.linkedin.com" target="_blank" id="twt"></a>
-                    <a class="ballinsta" href="https://www.instagram.com/" target="_blank" id="insta"> </a>
-                    <a class="ballyt" href="https://www.youtube.com" target="_blank" id="youtube"> </a>
-                </div>
-            </div>
+            <h3>O projeto foi desenvolvido com 💙 por</h3>
+          
+            <ul>
+                <li> <a href="https://www.linkedin.com/in/b%C3%A1rbara-moreira-683880188/">Barbara Moreira</a> </li>
+                <li> <a href="https://www.linkedin.com/in/lorrany-hengles-332726159/"> Lorrany Hengles</a></li>
+                <li> <a href="https://www.linkedin.com/in/pedrolopesrufino/"> Pedro Rufino</a> e </li>
+                <li> <a href="https://www.linkedin.com/in/vitor-castorino-teodoro-329987118/"> Vitor Castorino</a> </li>
+            </ul>
         </footer>
 
 
@@ -259,7 +223,7 @@
                 <form class="form-login" method="POST" action="/login">
                     {% csrf_token %}
                     <p>Digite seu e-mail:</p>
-                    <input type="email" name="email" placeholder=' exemplo@gmail.com' required>
+                    <input type="email" name="email" placeholder='exemplo@gmail.com' required>
                     <p>Digite sua senha:</p>
                     <input type="password">
                     <p class="msg"> {{msg}}</p>
